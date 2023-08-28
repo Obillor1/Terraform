@@ -59,3 +59,4 @@ AWS KEY_PAIR
 resource "aws_key_pair" "mykey" {
   key_name    = "demokey"
   public_key  = "${file("${path.module}/demokey.pub")}"
+}
