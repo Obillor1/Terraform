@@ -1,0 +1,103 @@
+#-----------------------------
+# Create VPC
+#-----------------------------
+resource "aws_vpc" "osovpc" {
+  cidr_block       = "20.0.0.0/16"
+  instance_tenancy = "default"
+
+  tags = {
+    Name = "osovpc"
+  }
+}
+
+# subnet Creation
+
+resource "aws_subnet" "oso_sub" {
+  vpc_id     = aws_vpc.osovpc.id
+  cidr_block = "20.0.1.0/24"
+
+  tags = {
+    Name = "oso_sub"
+  }
+}
+
+
+
+resource "aws_route_table" "myRT" {
+  vpc_id = aws_vpc.osovpc.id
+
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.igw.id
+  }
+
+ tags = {
+    Name = "my_rtd"
+  }
+}
+
+
+resource "aws_internet_gateway" "igw" {
+  vpc_id = aws_vpc.osovpc.id
+
+  tags = {
+    Name = "oso_igw"
+  }
+}
+
+resource "aws_route_table_association" "my_rta" {
+  subnet_id      = aws_subnet.oso_sub.id
+  route_table_id = aws_route_table.myRT.id
+}
+
+
+
+#     EC2
+#-------------------------------------------------
+#AWS KEY PAIR
+#-------------------------------------------------
+ resource "aws_key_pair" "mykey" {
+  key_name    = "demokey"
+  public_key  = "${file("${path.module}/demokey.pub")}"
+}
+
+
+resource "aws_instance" "myec2" {
+  ami                   = "ami-024e6efaf93d85776"
+  instance_type         = "t2.micro"
+  availability_zone     = "us-east-2c"
+  key_name              = "${aws_key_pair.mykey.key_name}"
+  subnet_id             = "${aws_subnet.oso_sub.id}"
+  security_groups       = ["${aws_security_group.osoSG.id}"]
+
+  root_block_device {
+    volume_size         = 40
+    volume_type         = "gp2"
+  }
+
+
+  tags = {
+    Name = "myec2"
+  }
+}
+
+
+
+#Security_Group
+
+resource "aws_security_group" "osoSG" {
+  name        = "osoSG"
+  description = "Allow TLS inbound traffic"
+  vpc_id      = aws_vpc.osovpc.id
+
+  ingress {
+    description      = "SSH from VPC"
+    from_port        = 22
+    to_port          = 22
+    protocol         = "tcp"
+    cidr_blocks      = [aws_vpc.osovpc.cidr_block]
+  }
+  tags = {
+    Name = "osoSG"
+  }
+}
