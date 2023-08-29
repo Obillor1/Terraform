@@ -13,8 +13,9 @@ resource "aws_vpc" "osovpc" {
 # subnet Creation
 
 resource "aws_subnet" "oso_sub" {
-  vpc_id     = aws_vpc.osovpc.id
-  cidr_block = "20.0.1.0/24"
+  vpc_id                        = aws_vpc.osovpc.id
+  map_public_ip_on_launch       = true
+  cidr_block                    = "20.0.1.0/24"
 
   tags = {
     Name = "oso_sub"
@@ -51,10 +52,9 @@ resource "aws_route_table_association" "my_rta" {
 }
 
 
-
 #     EC2
 #-------------------------------------------------
-#AWS KEY PAIR
+#AWS KEY PAIR Key was geerated with ssh_keygen on base machine
 #-------------------------------------------------
  resource "aws_key_pair" "mykey" {
   key_name    = "demokey"
@@ -95,9 +95,24 @@ resource "aws_security_group" "osoSG" {
     from_port        = 22
     to_port          = 22
     protocol         = "tcp"
-    cidr_blocks      = [aws_vpc.osovpc.cidr_block]
+    cidr_blocks      = ["0.0.0.0/0"]
+    #cidr_blocks      = [aws_vpc.osovpc.cidr_block]
   }
+
+  egress {
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+  }
+
   tags = {
     Name = "osoSG"
   }
 }
+
+#------------------EIP----------------
+#resource "aws_eip" "osoEip" {
+  #instance = aws_instance.myec2.id
+  #domain   = "vpc"
+#}
