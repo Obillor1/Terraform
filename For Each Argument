@@ -1,0 +1,22 @@
+resource "aws_instance" "myec2" {
+  ami                   = "ami-053b0d53c279acc90"
+  instance_type         = "t2.micro"
+  availability_zone     = "us-east-1d"
+# key_name              = "${aws_key_pair.mykey.key_name}"
+  subnet_id             = "subnet-08069834fc92c7066"
+# security_groups       = ["${aws_security_group.osoSG.id}"]
+
+  root_block_device {
+    volume_size         = 40
+    volume_type         = "gp2"
+  }
+
+  for_each = {
+    "dev"  = "server"
+    "app"  = " server"
+}
+
+  tags = {
+    Name = "${each.key}-${each.value}"
+  }
+}
