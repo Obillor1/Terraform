@@ -42,4 +42,18 @@ variable "instance_type" {
 
  Error: collecting instance settings: InvalidAMIID.Malformed: Invalid id: "var.ami" (expecting "ami-...")
 This error shows that the main file values needs to be interpolated
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+variable "instance_count" {
+  description   = "This is a variable for specifying number of instances"
+  type          = number
+  default       = 2
+}
 
+variable "tag" {
+  description   = "This is a variable for specifying instance name"
+  type          = string
+  default       = "Oso-Ec2"
+# on the maintf file the keyalue for the name becomes;
+tags = {
+    Name = "${var.tag}-${count.index}" 
+}
