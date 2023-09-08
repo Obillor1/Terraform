@@ -1,0 +1,25 @@
++++++++++++++++++++++++++++++
+STRING VARIABLE FOR REGION
++++++++++++++++++++++++++++++
+variable "region" {
+  description   = "This is a variable for specifying location"
+  type          = string
+  default       = "us-east-1"
+}
+
+variable "access-key" {
+  description   = "This is a variable for specifying access-key"
+  type          = string
+  default       = "AKIAUAFTLIVUALFRVXJ7"
+}
+
+variable "secret-key" {
+  description   = "This is a variable for specifying secret-key"
+  type          = string
+  default       = "74YpELTVOowKMoajVV7ACK33owo5XiuR30UcDbEw"
+}
+
+
+  region     = "us-east-1"
+  access_key = "AKIAUAFTLIVUALFRVXJ7"
+  secret_key = "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"
