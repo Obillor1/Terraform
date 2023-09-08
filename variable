@@ -10,16 +10,36 @@ variable "region" {
 variable "access-key" {
   description   = "This is a variable for specifying access-key"
   type          = string
-  default       = "AKIAUAFTLIVUALFRVXJ7"
+  default       = "AKIAUAFTLIVUAL7"
 }
 
 variable "secret-key" {
   description   = "This is a variable for specifying secret-key"
   type          = string
-  default       = "74YpELTVOowKMoajVV7ACK33owo5XiuR30UcDbEw"
+  default       = "74YpELTVOowKMoaj5XiuR30UcDbEw"
 }
 
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+THIS IS BEING CALLED FROM THE PROVIDER.TF as show below
+Provider "aws" {
+  region = "var.region"
+  access = "var.access-key"
+}
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+EC2 VARIABLE
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+variable "ami" {
+  description   = "This is a variable for specifying ami"
+  type          = string
+  default       = "ami-053b0d53c279acc90"
+}
 
-  region     = "us-east-1"
-  access_key = "AKIAUAFTLIVUALFRVXJ7"
-  secret_key = "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"
+variable "instance_type" {
+  description   = "This is a variable for specifying instance"
+  type          = string
+  default       = "t2.micro"
+}
+
+ Error: collecting instance settings: InvalidAMIID.Malformed: Invalid id: "var.ami" (expecting "ami-...")
+This error shows that the main file values needs to be interpolated
+
