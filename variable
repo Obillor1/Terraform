@@ -53,7 +53,7 @@ variable "tag" {
   description   = "This is a variable for specifying instance name"
   type          = string
   default       = "Oso-Ec2"
-# on the maintf file the keyalue for the name becomes;
+# on the main.tf file the keyalue for the name becomes;
 tags = {
     Name = "${var.tag}-${count.index}" 
 }
