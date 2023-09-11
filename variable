@@ -61,3 +61,12 @@ tags = {
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 BOOLEAN
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+This accepts True or false
+#######On the variable.tf add
+variable "mysub" {
+  description   = "This is a variable for specifying subnet"
+  type          = boolean
+  default       = true
+}
+Then set the subnet resource on the ec2.tf file with an interpolation
+
