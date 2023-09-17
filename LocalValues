@@ -15,5 +15,5 @@ After this has been added, go to the config dependecies and add the key | value 
 ++++++++++++
 EC2 Instance
 ++++++++++++
-ami             = "local.ami"
-instance_type   = "local.type" 
+ami             = "${local.ami}"
+instance_type   = "${local.type}" 
