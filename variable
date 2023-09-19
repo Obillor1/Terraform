@@ -22,8 +22,8 @@ variable "secret-key" {
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 THIS IS BEING CALLED FROM THE PROVIDER.TF as show below
 Provider "aws" {
-  region = "var.region"
-  access = "var.access-key"
+  region = "${var.region}"
+  access = "${var.access-key}"
 }
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 EC2 VARIABLE
