@@ -61,6 +61,7 @@ resource "aws_route_table_association" "my_rta" {
   public_key  = "${file("${path.module}/demokey.pub")}"
 }
 # This file function is used to pull the public key from the base machine.
+# Do an SSH-KeyGen, change the location to the current directory (/home/ec2-user/terraform/demokey)
 
 
 resource "aws_instance" "myec2" {
