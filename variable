@@ -70,3 +70,12 @@ variable "mysub" {
 }
 Then set the subnet resource on the ec2.tf file with an interpolation
 
++++++++++++++++++++++++++++++++++++
+VALIdatiON IN TERRAFORM
++++++++++++++++++++++++++++++++++++
+substr(sting, offset, length)
+
+in the vaable.tf file, under the config,
+  validation {
+    condition     = length(var.instance_ami) > 4 && substr(var.instance_ami, 0, 4) == "ami-"
+    error_message = "The Ec2 ami ID must be a valid ami ID"
