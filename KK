@@ -20,3 +20,16 @@ resource "local_file" "krill"{
   filename = "/root/krill"
   content =  "krill"
 #########################################
+
+SPECIFYING OUTPUT ID
+#########################################
+
+resource "aws_instance" "example_instance" {
+  # Specify instance configuration...
+}
+
+output "instance_id" {
+  value = aws_instance.example_instance.id
+}
+##########################################
+
