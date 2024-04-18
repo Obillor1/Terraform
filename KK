@@ -43,3 +43,27 @@ output content {
   description = "Print the content of the file"
 ##########################################
 
+
+TERRAFORM LIFECYCLE RULE
+
+
+resource "local_file" "krill"{
+  filename = "/root/krill"
+  content =  "krill"
+
+i.   lifecycle {
+      create_before_destroy = true   ----- This tells terraform to create the infrastructure before destroying.
+}
+
+or 
+
+ii.   lifecycle {
+        prevent_destroy =true -----This prevent terraform from destroying the old infrastructure.
+}
+
+iii.   lifecycle {
+         ignore_changes = [ -----This ignores the tag for the resources and themore list can be added like - ami.
+           tags
+}
+###########################################
+
