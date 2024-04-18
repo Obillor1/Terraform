@@ -31,5 +31,15 @@ resource "aws_instance" "example_instance" {
 output "instance_id" {
   value = aws_instance.example_instance.id
 }
+
+main.tf - file***************************
+resource "local_file" "krill"{
+  filename = "/root/krill"
+  content =  "krill"
+
+output content {
+  value  = local_file.krill.content
+  sensitive  = false
+  description = "Print the content of the file"
 ##########################################
 
