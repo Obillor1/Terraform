@@ -20,3 +20,17 @@ resource "aws_instance" "myec2" {
     Name = "${each.key}-${each.value}"
   }
 }
+
+###################
+variable "project-sapphire-users" {
+     type = list(string)
+     default = [ "mary", "jack", "jill", "mack", "buzz", "mater"]
+}
+
+COUNT in main config file
+
+resource "aws_iam_user" "users" {
+     name = var.project-sapphire-users[count.index]
+     count = length(var.project-sapphire-users)
+}
+####################
