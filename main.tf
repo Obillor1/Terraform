@@ -60,3 +60,10 @@ resource "aws_key_pair" "mykey" {
   key_name    = "demokey"
   public_key  = "${file("${path.module}/demokey.pub")}"
 }
+
+OR
+#You can also use variable for key_name
+resource "aws_key_pair" "cerberus-key" {
+    key_name = "cerberus"
+    public_key = file(".ssh/cerberus.pub")
+}
