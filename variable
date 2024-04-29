@@ -70,6 +70,24 @@ variable "mysub" {
 }
 Then set the subnet resource on the ec2.tf file with an interpolation
 
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+LIST OF STRING
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+variable "instance_type" {
+  description   = "This is a variable for specifying instance"
+  type          = list(string)
+  default       = ["t2.micro", "t3.medium"]
+}
+
+#### After defining the above in the variable.tf file, go to the main.tf file and call it in the resource;
+     resource "aws_instance" "my_ec2" {
+       instance_type = "${var.instance_type[0]}"   #### This calls up the t2.micro instance type since it is in an array
+
+
+
 +++++++++++++++++++++++++++++++++++
 VALIdatiON IN TERRAFORM
 +++++++++++++++++++++++++++++++++++
