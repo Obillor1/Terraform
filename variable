@@ -66,7 +66,7 @@ This accepts True or false
 variable "mysub" {
   description   = "This is a variable for specifying subnet"
   type          = boolean
-  default       = true
+  default       = true          (This is for the argument - ###map_public_ip_on_launch### which is a boolean type)
 }
 Then set the subnet resource on the ec2.tf file with an interpolation
 
