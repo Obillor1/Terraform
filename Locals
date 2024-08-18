@@ -1,0 +1,17 @@
+#Defining local values in terraform
+
+locals {
+  instance_type = {
+    default = "t2.micro"
+    prod    = "m5.large"
+    dev     = "t2.nano"
+  
+}
+}
+
+
+resource "aws_instance" "this" {
+  ami                     = "ami-05c3dc660cb6907f0"
+  instance_type           = local.instance_type[terraform.workspace]
+
+}
