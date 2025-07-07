@@ -1,4 +1,4 @@
-This sis passed directly into the configuration file order than the variable.tf file.
+This is passed directly into the configuration file order than the variable.tf file.
 
 Local {
   ami  = "ami-053b0d53c279acc90"
